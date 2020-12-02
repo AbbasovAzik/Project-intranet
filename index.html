@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Xalqbank - Intranet v.1</title>
+    <link rel="stylesheet" href="src/styles/style.css" />
+  </head>
+  <body>
+    <div x-data="{...hamburger(),...subMenu(),...dropDown(),...exchangeTab()}">
+      <!-- Header-->
+      <header>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-2 hidden-lg">
+              <div class="__logo">
+                <a href="/">
+                  <div id="__brand">
+                    <img src="src/img/logo2.svg" alt="Xalqbank Intranet" />
+                  </div>
+                </a>
+
+                <div id="__hamburger" @click="open">
+                  <img src="src/img/hamburgermenu.svg" alt="" />
+                </div>
+              </div>
+            </div>
+            <div class="col-lg offset-2">
+              <div class="__search">
+                <img src="src/img/searchIcon.svg" alt="Search" />
+                <input type="text" placeholder="Mən axtarıram" />
+              </div>
+            </div>
+
+            <div class="col-lg-3">
+              <div class="__profile">
+                <div id="__clock">14:20</div>
+                <div id="__notify">
+                  <div class="circle">0</div>
+                  <img src="src/img/bell.svg" alt="Notify" />
+                </div>
+                <div class="__user">
+                  <div id="__avatar">
+                    <img src="src/img/avatar.svg" alt="Username" />
+                  </div>
+                  <div id="__user_data">
+                    <div id="__name">Azər A.</div>
+                    <div id="__rank">Super admin</div>
+                  </div>
+
+                  <div id="__dropdown">
+                    <img
+                      src="src/img/arrow.svg"
+                      alt="Dropdown"
+                      @click="activeDrop"
+                    />
+
+                    <ul x-show="isActiveDrop()">
+                      <li><a href="#">Profil</a></li>
+                      <li><a href="#">Çıxış</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <!-- Header end -->
+
+      <!-- Sidebar -->
+      <div class="__sidebar hidden-md">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="__logo">
+              <a href="/">
+                <div id="__brand">
+                  <img src="src/img/logo.svg" alt="Xalqbank Intranet" />
+                </div>
+              </a>
+              <span id="__close" @click="close">
+                <img src="src/img/close.svg" alt="Close" />
+              </span>
+            </div>
+          </div>
+
+          <!-- Menu -->
+          <div class="col-lg-12">
+            <div class="__menu">
+              <h3>Əsas səhifə</h3>
+
+              <ul>
+                <li class="__active">
+                  <a href="#"
+                    ><span><i class="icon-home"></i>&nbsp; Əsas səhifə</span></a
+                  >
+                </li>
+                <li>
+                  <a href="#" @click="selected('family')"
+                    ><span
+                      ><i class="icon-heart"></i>&nbsp; Xalq Bank ailəsi</span
+                    >
+                    <span x-show="!isSelected('family')" id="__arrow_left">
+                      <img src="src/img/arrow.png" alt="Menu Open" />
+                    </span>
+                    <span x-show="isSelected('family')" id="__arrow_bottom">
+                      <img src="src/img/arrow.png" alt="Menu Close" />
+                    </span>
+                  </a>
+
+                  <ul x-show="isSelected('family')">
+                    <li>
+                      <a href="#"
+                        ><span
+                          ><i class="icon-pen"></i>&nbsp; Rəhbərlik</span
+                        ></a
+                      >
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="#" @click="selected('about')"
+                    ><span
+                      ><i class="icon-info-circled"></i>&nbsp; Haqqımızda</span
+                    >
+
+                    <span x-show="!isSelected('about')" id="__arrow_left">
+                      <img src="src/img/arrow.png" alt="Menu Open" />
+                    </span>
+                    <span x-show="isSelected('about')" id="__arrow_bottom">
+                      <img src="src/img/arrow.png" alt="Menu Close" />
+                    </span>
+                  </a>
+
+                  <ul x-show="isSelected('about')">
+                    <li>
+                      <a href="#"
+                        ><span
+                          ><i class="icon-pen"></i>&nbsp; Rəhbərlik</span
+                        ></a
+                      >
+                    </li>
+
+                    <li>
+                      <a href="#"
+                        ><span
+                          ><i class="icon-pen"></i>&nbsp; Rəhbərlik</span
+                        ></a
+                      >
+                    </li>
+
+                    <li>
+                      <a href="#"
+                        ><span
+                          ><i class="icon-pen"></i>&nbsp; Rəhbərlik</span
+                        ></a
+                      >
+                    </li>
+
+                    <li>
+                      <a href="#"
+                        ><span
+                          ><i class="icon-pen"></i>&nbsp; Rəhbərlik</span
+                        ></a
+                      >
+                    </li>
+
+                    <li>
+                      <a href="#"
+                        ><span
+                          ><i class="icon-pen"></i>&nbsp; Rəhbərlik</span
+                        ></a
+                      >
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="#"
+                    ><span
+                      ><i class="icon-doc"></i>&nbsp; Sənədlər və
+                      şablonlar</span
+                    ></a
+                  >
+                </li>
+                <li>
+                  <a href="#"
+                    ><span><i class="icon-calendar"></i>&nbsp; Tədbirlər</span>
+                    <span id="circle">17</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#"
+                    ><span><i class="icon-bookmark"></i>&nbsp; Forum</span></a
+                  >
+                </li>
+                <li>
+                  <a href="#"
+                    ><span
+                      ><i class="icon-cog"></i>&nbsp; Tənzimləmələr</span
+                    ></a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- Menu end -->
+        </div>
+      </div>
+      <!-- Sidebar end -->
+
+      <!-- Content -->
+      <div class="container __main">
+        <div class="__page_title">
+          <h2>Əsas səhifə</h2>
+          <p>Xəbərlər və digər məlumatlar</p>
+        </div>
+        <div class="__news_list">
+          <div class="row">
+            <div class="col-lg-3">
+              <a href="#">
+                <div id="__card">
+                  <div id="__title">Xalq Kapital investment company</div>
+                  <div id="__img">
+                    <img src="src/img/bg1.png" alt="news" />
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <div class="col-lg-3">
+              <a href="#">
+                <div id="__card">
+                  <div id="__title">Xalq Kapital investment company</div>
+                  <div id="__img">
+                    <img src="src/img/bg2.png" alt="news" />
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <div class="col-lg-3">
+              <a href="#">
+                <div id="__card">
+                  <div id="__title">Xalq Kapital investment company</div>
+                  <div id="__img">
+                    <img src="src/img/bg3.png" alt="news" />
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <div class="col-lg-3">
+              <a href="#">
+                <div id="__card">
+                  <div id="__title">Xalq Kapital investment company</div>
+                  <div id="__img">
+                    <img src="src/img/bg4.png" alt="news" />
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="__birthdays mb-4">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-12">
+                <div id="__head">
+                  <div id="__title">
+                    <h2>Bu ay doğum günü olanlar</h2>
+                    <div class="__allBtnShow">
+                      <button>
+                        Hamısını bax &nbsp;<img
+                          src="src/img/arrow2.png"
+                          alt="All list"
+                        />
+                      </button>
+                    </div>
+                  </div>
+
+                  <p>Bankda işləyən əməkdaşların doğum günüləri</p>
+                </div>
+
+                <div id="__list">
+                  <div class="row">
+                    <div class="col-lg-1">
+                      <div class="__user">
+                        <div id="__avatar">
+                          <img src="src/img/avatar.svg" alt="USERNAME" />
+                        </div>
+
+                        <div id="__name">Azər A.</div>
+                        <div id="__rank">Super Admin</div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-1">
+                      <div class="__user">
+                        <div id="__avatar">
+                          <img src="src/img/avatar.svg" alt="USERNAME" />
+                        </div>
+
+                        <div id="__name">Azər A.</div>
+                        <div id="__rank">Super Admin</div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-1">
+                      <div class="__user">
+                        <div id="__avatar">
+                          <img src="src/img/avatar.svg" alt="USERNAME" />
+                        </div>
+
+                        <div id="__name">Azər A.</div>
+                        <div id="__rank">Super Admin</div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-1">
+                      <div class="__user">
+                        <div id="__avatar">
+                          <img src="src/img/avatar.svg" alt="USERNAME" />
+                        </div>
+
+                        <div id="__name">Azər A.</div>
+                        <div id="__rank">Super Admin</div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-1">
+                      <div class="__user">
+                        <div id="__avatar">
+                          <img src="src/img/avatar.svg" alt="USERNAME" />
+                        </div>
+
+                        <div id="__name">Azər A.</div>
+                        <div id="__rank">Super Admin</div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-1">
+                      <div class="__user">
+                        <div id="__avatar">
+                          <img src="src/img/avatar.svg" alt="USERNAME" />
+                        </div>
+
+                        <div id="__name">Azər A.</div>
+                        <div id="__rank">Super Admin</div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-1">
+                      <div class="__user">
+                        <div id="__avatar">
+                          <img src="src/img/avatar.svg" alt="USERNAME" />
+                        </div>
+
+                        <div id="__name">Azər A.</div>
+                        <div id="__rank">Super Admin</div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-1">
+                      <div class="__user">
+                        <div id="__avatar">
+                          <img src="src/img/avatar.svg" alt="USERNAME" />
+                        </div>
+
+                        <div id="__name">Azər A.</div>
+                        <div id="__rank">Super Admin</div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-1">
+                      <div class="__user">
+                        <div id="__avatar">
+                          <img src="src/img/avatar.svg" alt="USERNAME" />
+                        </div>
+
+                        <div id="__name">Azər A.</div>
+                        <div id="__rank">Super Admin</div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-1">
+                      <div class="__user">
+                        <div id="__avatar">
+                          <img src="src/img/avatar.svg" alt="USERNAME" />
+                        </div>
+
+                        <div id="__name">Azər A.</div>
+                        <div id="__rank">Super Admin</div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-1">
+                      <div class="__user">
+                        <div id="__avatar">
+                          <img src="src/img/avatar.svg" alt="USERNAME" />
+                        </div>
+
+                        <div id="__name">Azər A.</div>
+                        <div id="__rank">Super Admin</div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-1">
+                      <div class="__user">
+                        <div id="__avatar">
+                          <img src="src/img/avatar.svg" alt="USERNAME" />
+                        </div>
+
+                        <div id="__name">Azər A.</div>
+                        <div id="__rank">Super Admin</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="__content mb-4">
+          <div class="row">
+            <div class="col-lg-6 mb-4">
+              <div class="__news_event">
+                <div id="__head">
+                  <div id="__title">
+                    <h2>Xəbərlər və tədbirlər</h2>
+                    <div class="__allBtnShow">
+                      <button>
+                        Hamısını bax &nbsp;<img
+                          src="src/img/arrow2.png"
+                          alt="All list"
+                        />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="__list">
+                  <ul>
+                    <li>
+                      <a href="#">
+                        <div id="__news_img">
+                          <img src="src/img/bg1.png" alt="News Title" />
+                        </div>
+                        <div id="__news_detail">
+                          <div id="__news_title">
+                            Xalq Bankın ödəniş kartı ilə qazanmaq imkanı
+                          </div>
+                          <div id="__news_text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua...
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="#">
+                        <div id="__news_img">
+                          <img src="src/img/bg1.png" alt="News Title" />
+                        </div>
+                        <div id="__news_detail">
+                          <div id="__news_title">
+                            Xalq Bankın ödəniş kartı ilə qazanmaq imkanı
+                          </div>
+                          <div id="__news_text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua...
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="#">
+                        <div id="__news_img">
+                          <img src="src/img/bg1.png" alt="News Title" />
+                        </div>
+                        <div id="__news_detail">
+                          <div id="__news_title">
+                            Xalq Bankın ödəniş kartı ilə qazanmaq imkanı
+                          </div>
+                          <div id="__news_text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua...
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-3">
+              <div class="__links">
+                <div id="__head">
+                  <div id="__title">
+                    <h2>Faydalı linklər</h2>
+                  </div>
+                </div>
+                <ul>
+                  <li>
+                    <a href="#"
+                      ><img src="src/img/Attach.png" alt="Attach" />&nbsp; Xalq
+                      Bankın ödəniş kartı</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#"
+                      ><img src="src/img/Attach.png" alt="Attach" />&nbsp; Xalq
+                      Bankın ödəniş kartı</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#"
+                      ><img src="src/img/Attach.png" alt="Attach" />&nbsp; Xalq
+                      Bankın ödəniş kartı</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#"
+                      ><img src="src/img/Attach.png" alt="Attach" />&nbsp; Xalq
+                      Bankın ödəniş kartı</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#"
+                      ><img src="src/img/Attach.png" alt="Attach" />&nbsp; Xalq
+                      Bankın ödəniş kartı</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#"
+                      ><img src="src/img/Attach.png" alt="Attach" />&nbsp; Xalq
+                      Bankın ödəniş kartı</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#"
+                      ><img src="src/img/Attach.png" alt="Attach" />&nbsp; Xalq
+                      Bankın ödəniş kartı</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-lg-3">
+              <div class="row">
+                <div class="col-12">
+                  <div class="__live">
+                    <div id="__head">
+                      <div id="__title">
+                        <h2>Canlı</h2>
+                        <p>Hal hazırda intranetdə</p>
+                      </div>
+                    </div>
+
+                    <div id="__stats">240 nəfər</div>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="__query">
+                    <div id="__head">
+                      <div id="__title">
+                        <h2>Sorğu</h2>
+                        <p>Intranetdən razısınız?</p>
+                      </div>
+                    </div>
+
+                    <div id="__result">
+                      <input type="radio" id="he" name="radio-group" />
+                      <label for="he">Hə</label>
+                    </div>
+
+                    <div id="__result">
+                      <input type="radio" id="yox" name="radio-group" />
+                      <label for="yox">Yox</label>
+                    </div>
+
+                    <div id="__resultBtn">
+                      <button>Səs ver</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div class="__news_event">
+                <div id="__head">
+                  <div id="__title">
+                    <h2>Vakansiyalar</h2>
+                    <div class="__allBtnShow">
+                      <button>
+                        Hamısını bax &nbsp;<img
+                          src="src/img/arrow2.png"
+                          alt="All list"
+                        />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="__list">
+                  <ul>
+                    <li>
+                      <a href="#">
+                        <div id="__news_img">
+                          <img src="src/img/bg1.png" alt="News Title" />
+                        </div>
+                        <div id="__news_detail">
+                          <div id="__news_title">IT Sistem Administrator</div>
+                          <div id="__news_text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua...
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="#">
+                        <div id="__news_img">
+                          <img src="src/img/bg1.png" alt="News Title" />
+                        </div>
+                        <div id="__news_detail">
+                          <div id="__news_title">C# Developer</div>
+                          <div id="__news_text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua...
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="#">
+                        <div id="__news_img">
+                          <img src="src/img/bg1.png" alt="News Title" />
+                        </div>
+                        <div id="__news_detail">
+                          <div id="__news_title">SQL Developer</div>
+                          <div id="__news_text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua...
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div class="__exchange">
+                <div id="__head">
+                  <div id="__title">
+                    <h2>Məzənnə</h2>
+                  </div>
+                </div>
+
+                <div class="__tabs">
+                  <ul id="__tab_head">
+                    <li
+                      :class="{ '__active': isTabActive('mezenne') }"
+                      @click="selectedTab('mezenne')"
+                    >
+                      Mərkəzi Bank
+                    </li>
+                    <li
+                      :class="{ '__active': isTabActive('nagd') }"
+                      @click="selectedTab('nagd')"
+                    >
+                      Nağd
+                    </li>
+                    <li
+                      :class="{ '__active': isTabActive('nagdsiz') }"
+                      @click="selectedTab('nagdsiz')"
+                    >
+                      Nağdsız
+                    </li>
+                  </ul>
+                  <hr />
+
+                  <div class="__currency mt-3" x-show="isTabActive('mezenne')">
+                    <ul id="__currency_list">
+                      <li>
+                        <span id="__symbol">USD</span>
+                        <span id="__number">1.7000</span>
+                      </li>
+                      <li>
+                        <span id="__symbol">EUR</span>
+                        <span id="__number">2.0271</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="__currency mt-3" x-show="isTabActive('nagd')">
+                    <ul id="__currency_list">
+                      <li>
+                        <span id="__symbol">TRY</span>
+                        <span id="__number">2.5000</span>
+                      </li>
+                      <li>
+                        <span id="__symbol">AED</span>
+                        <span id="__number">0.4603</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="__currency mt-3" x-show="isTabActive('nagdsiz')">
+                    <ul id="__currency_list">
+                      <li>
+                        <span id="__symbol">GBP</span>
+                        <span id="__number">2.345</span>
+                      </li>
+                      <li>
+                        <span id="__symbol">RUB</span>
+                        <span id="__number">1.565</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="__branch_txt">
+                    <span>
+                      *Bəzi filiallar üzrə fərqli məzənnələr təyin edilə
+                      bilər</span
+                    >
+                    <span>* 500 avro əskinaz üzrə 0.5% komissiya tutulur</span>
+                  </div>
+
+                  <div class="__exchange_element">
+                    <div class="row">
+                      <div class="col-6">
+                        <input type="number" />
+                        <select name="currency" id="currency">
+                          <option value="1">$</option>
+                          <option value="2">EUR</option>
+                          <option value="3">TRY</option>
+                        </select>
+                      </div>
+
+                      <div class="col-6">
+                        <input type="number" />
+                        <select name="currency" id="currency">
+                          <option value="1">$</option>
+                          <option value="2">EUR</option>
+                          <option value="3">TRY</option>
+                        </select>
+                      </div>
+
+                      <div
+                        class="col-12 d-flex justify-content-center mt-4 mb-3"
+                      >
+                        <div id="__calc_text">
+                          Kalkulyator AR Mərkəzi Bankın kursuna əsaslanır.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Content end -->
+    </div>
+
+    <script src="src/js/alpine.min.js"></script>
+    <script src="src/js/app.js"></script>
+  </body>
+</html>
