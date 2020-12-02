@@ -164,7 +164,7 @@ header {
     header .__profile #__clock {
       background-color: #ffdde0;
       padding: 5px 3px;
-      width: 65px;
+      width: auto;
       text-align: center;
       margin-right: 21px;
       border-radius: 60px;
